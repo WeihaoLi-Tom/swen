@@ -18,6 +18,12 @@ public class Driver {
         // Pass the properties object as the first argument
         String logResult = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations).runApp(true);
         System.out.println("logResult = " + logResult);
+
+
+        //Log
+        Logger logger = new Logger();
+        SpaceInvader spaceInvader = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations);
+        System.out.println("logResult = " + logger.getLog());
     }
 
     public static ArrayList<AlienGridLocation> convertFromProperty(Properties properties, String propertyName) {

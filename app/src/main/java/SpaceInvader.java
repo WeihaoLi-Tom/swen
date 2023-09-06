@@ -24,6 +24,11 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
   private ArrayList<AlienGridLocation> invulnerableAlienLocations;
   private ArrayList<AlienGridLocation> multipleAlienLocations;
   private Alien[][] alienGrid = null;
+  private Logger logger;
+
+  public void setLogger(Logger logger) {
+    this.logger = logger;
+  }
 
   public SpaceInvader(Properties properties, ArrayList<AlienGridLocation> powerfulAlienLocations, ArrayList<AlienGridLocation> invulnerableAlienLocations, ArrayList<AlienGridLocation> multipleAlienLocations) {
     super(200, 100, 5, false);
@@ -120,35 +125,40 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
 
   @Override
   public void act() {
-    logResult.append("Alien locations: ");
-    for (int i = 0; i < nbRows; i++) {
-      for (int j = 0; j < nbCols; j++) {
-        Alien alienData = alienGrid[i][j];
-
-        String isDeadStatus = alienData.isRemoved() ? "Dead" : "Alive";
-        String gridLocation = "0-0";
-        if (!alienData.isRemoved()) {
-          gridLocation = alienData.getX() + "-" + alienData.getY();
+    if (logger != null) {
+      logger.append("Alien locations: ");
+      for (int i = 0; i < nbRows; i++) {
+        for (int j = 0; j < nbCols; j++) {
+          Alien alienData = alienGrid[i][j];
+          String isDeadStatus = alienData.isRemoved() ? "Dead" : "Alive";
+          String gridLocation = "0-0";
+          if (!alienData.isRemoved()) {
+            gridLocation = alienData.getX() + "-" + alienData.getY();
+          }
+          String alienDataString = String.format("%s@%d-%d@%s@%s#", alienData.getType(),
+                  alienData.getRowIndex(), alienData.getColIndex(), isDeadStatus, gridLocation);
+          logger.append(alienDataString);
         }
-        String alienDataString = String.format("%s@%d-%d@%s@%s#", alienData.getType(),
-                alienData.getRowIndex(), alienData.getColIndex(), isDeadStatus, gridLocation);
-        logResult.append(alienDataString);
       }
+      logger.appendLine("");
     }
-    logResult.append("\n");
   }
 
   public void notifyAliensMoveFast() {
-    logResult.append("Aliens start moving fast");
+    if (logger != null) {
+      logger.appendLine("Aliens start moving fast");
+    }
   }
 
   public void notifyAlienHit(List<Actor> actors) {
-    for (Actor actor: actors) {
-      Alien alien = (Alien)actor;
-      String alienData = String.format("%s@%d-%d",
-              alien.getType(), alien.getRowIndex(), alien.getColIndex());
-      logResult.append("An alien has been hit.");
-      logResult.append(alienData + "\n");
+    if (logger != null) {
+      for (Actor actor: actors) {
+        Alien alien = (Alien)actor;
+        String alienData = String.format("%s@%d-%d",
+                alien.getType(), alien.getRowIndex(), alien.getColIndex());
+        logger.append("An alien has been hit.");
+        logger.appendLine(alienData);
+      }
     }
   }
 
