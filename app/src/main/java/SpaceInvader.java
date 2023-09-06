@@ -13,57 +13,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class SpaceInvader extends GameGrid implements GGKeyListener
-{
+public class SpaceInvader extends GameGrid implements GGKeyListener {
   private int nbRows = 3;
   private int nbCols = 11;
   private boolean isGameOver = false;
   private boolean isAutoTesting = false;
   private Properties properties = null;
   private StringBuilder logResult = new StringBuilder();
-  private ArrayList<AlienGridLocation> powerfulAlienLocations = new ArrayList<AlienGridLocation>();
-  private ArrayList<AlienGridLocation> invulnerableAlienLocations = new ArrayList<AlienGridLocation>();
-  private ArrayList<AlienGridLocation> multipleAlienLocations = new ArrayList<AlienGridLocation>();
+  private ArrayList<AlienGridLocation> powerfulAlienLocations;
+  private ArrayList<AlienGridLocation> invulnerableAlienLocations;
+  private ArrayList<AlienGridLocation> multipleAlienLocations;
   private Alien[][] alienGrid = null;
-  public SpaceInvader(Properties properties) {
+
+  public SpaceInvader(Properties properties, ArrayList<AlienGridLocation> powerfulAlienLocations, ArrayList<AlienGridLocation> invulnerableAlienLocations, ArrayList<AlienGridLocation> multipleAlienLocations) {
     super(200, 100, 5, false);
     this.properties = properties;
+    this.powerfulAlienLocations = powerfulAlienLocations;
+    this.invulnerableAlienLocations = invulnerableAlienLocations;
+    this.multipleAlienLocations = multipleAlienLocations;
   }
 
-  private ArrayList<AlienGridLocation> convertFromProperty(String propertyName) {
-    String powerfulAlienString = properties.getProperty(propertyName);
-    ArrayList<AlienGridLocation> alienLocations = new ArrayList<>();
-    if (powerfulAlienString != null) {
-      String [] locations = powerfulAlienString.split(";");
-      for (String location: locations) {
-        String [] locationPair = location.split("-");
-        int rowIndex = Integer.parseInt(locationPair[0]);
-        int colIndex = Integer.parseInt(locationPair[1]);
-        alienLocations.add(new AlienGridLocation(rowIndex, colIndex));
-      }
-    }
-
-    return alienLocations;
-  }
-
-  private void setupAlienLocations() {
-    powerfulAlienLocations = convertFromProperty("Powerful.locations");
-    invulnerableAlienLocations = convertFromProperty("Invulnerable.locations");
-    multipleAlienLocations = convertFromProperty("Multiple.locations");
-  }
-
-  private boolean arrayContains(ArrayList<AlienGridLocation>locations, int rowIndex, int colIndex) {
+  private boolean arrayContains(ArrayList<AlienGridLocation> locations, int rowIndex, int colIndex) {
     for (AlienGridLocation location : locations) {
       if (location.rowIndex == rowIndex && location.colIndex == colIndex) {
         return true;
       }
     }
-
     return false;
   }
 
   private void setupAliens() {
-    setupAlienLocations();
     isAutoTesting = Boolean.parseBoolean(properties.getProperty("isAuto"));
     String aliensControl = properties.getProperty("aliens.control");
     List<String> movements = null;
@@ -107,7 +86,6 @@ public class SpaceInvader extends GameGrid implements GGKeyListener
     addKeyListener(ss);
   }
 
-
   public String runApp(boolean isDisplayingUI) {
     setSimulationPeriod(Integer.parseInt(properties.getProperty("simulationPeriod")));
     nbRows = Integer.parseInt(properties.getProperty("rows"));
@@ -128,7 +106,7 @@ public class SpaceInvader extends GameGrid implements GGKeyListener
       doRun();
     }
 
-    while(!isGameOver) {
+    while (!isGameOver) {
       try {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
@@ -161,7 +139,7 @@ public class SpaceInvader extends GameGrid implements GGKeyListener
   }
 
   public void notifyAliensMoveFast() {
-      logResult.append("Aliens start moving fast");
+    logResult.append("Aliens start moving fast");
   }
 
   public void notifyAlienHit(List<Actor> actors) {
