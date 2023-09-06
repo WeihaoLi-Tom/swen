@@ -88,6 +88,10 @@ public class Alien extends Actor
     if (getLocation().y > 90)
       removeSelf();
   }
+  public void destroy() {
+
+    removeSelf();
+  }
 
  
 
