@@ -5,6 +5,13 @@ import ch.aplu.jgamegrid.*;
 
 import java.util.List;
 
+// Alien.java
+// Used for SpaceInvader
+
+import ch.aplu.jgamegrid.*;
+
+import java.util.List;
+
 public class Alien extends Actor
 {
   private final int maxNbSteps = 16;
@@ -16,6 +23,7 @@ public class Alien extends Actor
   private String type;
   private int rowIndex;
   private int colIndex;
+  private int moveDistance = 1;
 
   public Alien(String imageName, String type, int rowIndex, int colIndex)
   {
@@ -67,19 +75,17 @@ public class Alien extends Actor
     }
   }
 
-  public void act()
-  {
+  public void act() {
+    Location prevLocation = getLocation();  // 获取移动前的位置
+
     checkMovements();
     if (!isMoving) {
       return;
     }
-    if (nbSteps < maxNbSteps)
-    {
+    if (nbSteps < maxNbSteps) {
       move();
       nbSteps++;
-    }
-    else
-    {
+    } else {
       nbSteps = 0;
       int angle;
       if (getDirection() == 0)
@@ -90,9 +96,18 @@ public class Alien extends Actor
       move();
       turn(angle);
     }
-    if (getLocation().y > 90)
+
+    Location newLocation = getLocation();
+
+
+    int distanceMoved = Math.abs(newLocation.x - prevLocation.x) + Math.abs(newLocation.y - prevLocation.y);
+    System.out.println("Alien of type " + type + " at position (" + getColIndex() + ", " + getRowIndex() + ") moved a distance of: " + distanceMoved);
+
+    if (newLocation.y > 90)
       removeSelf();
   }
+
+
   public void destroy() {
 
     removeSelf();
@@ -104,11 +119,17 @@ public class Alien extends Actor
   public GameGrid getGameGrid() {
     return this.gameGrid;
   }
+  public void move() {
+    for (int i = 0; i < moveDistance; i++) {
+      super.move();
+    }
+  }
+
+  // 修改moveFaster()方法
   public void moveFaster() {
-    int currentSpeed = getSlowDown();
-    setSlowDown(Math.max(1, currentSpeed - 1));
-  }
-
-
+    moveDistance = 2;
 
   }
+
+
+}

@@ -46,6 +46,11 @@ public class SpaceShip extends Actor implements GGKeyListener
             Bomb bomb = new Bomb();
             gameGrid.addActor(bomb, getLocation());
             nbShots++;
+            if (nbShots ==10 ) {
+              spaceInvader.notifyAliensMoveFast();
+
+
+            }
             break;
           case "E":
             spaceInvader.setIsGameOver(true);
@@ -96,11 +101,12 @@ public class SpaceShip extends Actor implements GGKeyListener
         Bomb bomb = new Bomb();
         gameGrid.addActor(bomb, getLocation());
         nbShots++;
-        if (nbShots % 20 == 0) {
+        if (nbShots ==1 ) {
           spaceInvader.notifyAliensMoveFast();
-          logResult.append("Aliens start moving fast");
+
 
         }
+
         break;
     }
 
@@ -118,3 +124,4 @@ public class SpaceShip extends Actor implements GGKeyListener
     return false;
   }
 }
+
