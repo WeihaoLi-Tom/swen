@@ -13,6 +13,7 @@ public class SpaceShip extends Actor implements GGKeyListener
   private boolean isAutoTesting = false;
   private List<String> controls = null;
   private int controlIndex = 0;
+  private StringBuilder logResult = new StringBuilder();
   public SpaceShip(SpaceInvader spaceInvader)
   {
     super("sprites/spaceship.gif");
@@ -95,6 +96,11 @@ public class SpaceShip extends Actor implements GGKeyListener
         Bomb bomb = new Bomb();
         gameGrid.addActor(bomb, getLocation());
         nbShots++;
+        if (nbShots % 20 == 0) {
+          spaceInvader.notifyAliensMoveFast();
+          logResult.append("Aliens start moving fast");
+
+        }
         break;
     }
 

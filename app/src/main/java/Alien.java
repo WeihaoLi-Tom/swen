@@ -101,8 +101,14 @@ public class Alien extends Actor
     this.type = type;
   }
 
+  public GameGrid getGameGrid() {
+    return this.gameGrid;
+  }
+  public void moveFaster() {
+    int currentSpeed = getSlowDown();
+    setSlowDown(Math.max(1, currentSpeed - 1));
+  }
 
- 
 
 
-}
+  }

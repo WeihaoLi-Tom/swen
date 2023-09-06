@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+
+
 public class SpaceInvader extends GameGrid implements GGKeyListener {
   private int nbRows = 3;
   private int nbCols = 11;
@@ -153,7 +155,19 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
 
   public void notifyAliensMoveFast() {
     logResult.append("Aliens start moving fast");
+    for (int i = 0; i < nbRows; i++) {
+      for (int j = 0; j < nbCols; j++) {
+        Alien alien = alienGrid[i][j];
+        logResult.append("Aliens start moving fast");
+        if (alien != null) {
+
+          alien.moveFaster();
+        }
+      }
+    }
+
   }
+
 
 
   public void notifyAlienHit(List<Actor> actors) {
@@ -184,6 +198,8 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
   {
     return false;
   }
+
+
 
 
 }

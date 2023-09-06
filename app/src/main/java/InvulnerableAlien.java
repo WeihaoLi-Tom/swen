@@ -18,7 +18,9 @@ public class InvulnerableAlien extends Alien {
     public void act() {
         super.act();
         if (invulnerableCounter > 0) {
-//            invulnerableCounter--;
+
+
+            invulnerableCounter--;
             if (invulnerableCounter == 0) {
                 setTransparency(1);
             }
