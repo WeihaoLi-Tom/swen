@@ -199,6 +199,9 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     return false;
   }
 
+  public String getVersion() {
+    return version;
+  }
 
 
 
