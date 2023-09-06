@@ -14,6 +14,8 @@ public class SpaceShip extends Actor implements GGKeyListener
   private List<String> controls = null;
   private int controlIndex = 0;
   private StringBuilder logResult = new StringBuilder();
+
+
   public SpaceShip(SpaceInvader spaceInvader)
   {
     super("sprites/spaceship.gif");
@@ -26,6 +28,7 @@ public class SpaceShip extends Actor implements GGKeyListener
   }
 
   private void autoMove() {
+    String version = spaceInvader.getVersion();
     if (isAutoTesting) {
       if (controls != null && controlIndex < controls.size()) {
         String control = controls.get(controlIndex);
@@ -46,7 +49,7 @@ public class SpaceShip extends Actor implements GGKeyListener
             Bomb bomb = new Bomb();
             gameGrid.addActor(bomb, getLocation());
             nbShots++;
-            if (nbShots ==10 ) {
+            if (nbShots ==10 &&"plus".equals(version)) {
               spaceInvader.notifyAliensMoveFast(getMoveDistance());
 
 
@@ -84,6 +87,7 @@ public class SpaceShip extends Actor implements GGKeyListener
 
   public boolean keyPressed(KeyEvent keyEvent)
   {
+    String version = spaceInvader.getVersion();
     Location next = null;
     switch (keyEvent.getKeyCode())
     {
@@ -101,7 +105,7 @@ public class SpaceShip extends Actor implements GGKeyListener
         Bomb bomb = new Bomb();
         gameGrid.addActor(bomb, getLocation());
         nbShots++;
-        if (nbShots ==10 ) {
+        if (nbShots ==10 && "plus".equals(version)) {
           spaceInvader.notifyAliensMoveFast(getMoveDistance());
 
 
