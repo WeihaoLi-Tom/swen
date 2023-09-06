@@ -26,7 +26,7 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
   private ArrayList<AlienGridLocation> invulnerableAlienLocations;
   private ArrayList<AlienGridLocation> multipleAlienLocations;
   private Alien[][] alienGrid = null;
-
+  private String version;
 
 
 
@@ -36,6 +36,7 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     this.powerfulAlienLocations = powerfulAlienLocations;
     this.invulnerableAlienLocations = invulnerableAlienLocations;
     this.multipleAlienLocations = multipleAlienLocations;
+    this.version = properties.getProperty("version");
   }
 
   private boolean arrayContains(ArrayList<AlienGridLocation> locations, int rowIndex, int colIndex) {
@@ -77,13 +78,13 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     }
   }
 
-// ... 其他代码 ...
+
 
   public void updateAlienGrid(Alien alien, int rowIndex, int colIndex) {
     alienGrid[rowIndex][colIndex] = alien;
   }
 
-// ... 其他代码 ...
+
 
 
 
@@ -197,6 +198,8 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
   {
     return false;
   }
+
+
 
 
 

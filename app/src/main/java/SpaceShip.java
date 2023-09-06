@@ -124,17 +124,25 @@ public class SpaceShip extends Actor implements GGKeyListener
     return false;
   }
   private int getMoveDistance() {
-    if (nbShots >= 500) {
-      return 5;
-    } else if (nbShots >= 100) {
-      return 4;
-    } else if (nbShots >= 50) {
-      return 3;
-    } else if (nbShots >= 10) {
-      return 2;
+    String version = spaceInvader.getVersion();
+    if ("plus".equals(version)) {
+      if (nbShots < 10) {
+        return 1;
+      } else if (nbShots < 50) {
+        return 2;
+      } else if (nbShots < 100) {
+        return 3;
+      } else if (nbShots < 500) {
+        return 4;
+      } else {
+        return 5;
+      }
+    } else if ("simple".equals(version)) {
+      return 1;
     }
-    return 1; // default move distance
+    return 1;
   }
+
 
 
 }
