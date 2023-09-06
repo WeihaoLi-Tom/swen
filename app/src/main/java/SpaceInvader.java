@@ -158,7 +158,6 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     for (int i = 0; i < nbRows; i++) {
       for (int j = 0; j < nbCols; j++) {
         Alien alien = alienGrid[i][j];
-        logResult.append("Aliens start moving fast");
         if (alien != null) {
 
           alien.moveFaster();

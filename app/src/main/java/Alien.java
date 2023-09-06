@@ -76,7 +76,7 @@ public class Alien extends Actor
   }
 
   public void act() {
-    Location prevLocation = getLocation();  // 获取移动前的位置
+    Location prevLocation = getLocation();
 
     checkMovements();
     if (!isMoving) {
