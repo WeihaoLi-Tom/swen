@@ -126,10 +126,10 @@ public class Alien extends Actor
   }
 
   // 修改moveFaster()方法
-  public void moveFaster() {
-    moveDistance = 2;
-
+  public void moveFaster(int distance) {
+    this.moveDistance = distance;
   }
+
 
 
 }

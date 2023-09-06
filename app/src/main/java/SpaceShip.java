@@ -47,7 +47,7 @@ public class SpaceShip extends Actor implements GGKeyListener
             gameGrid.addActor(bomb, getLocation());
             nbShots++;
             if (nbShots ==10 ) {
-              spaceInvader.notifyAliensMoveFast();
+              spaceInvader.notifyAliensMoveFast(getMoveDistance());
 
 
             }
@@ -101,8 +101,8 @@ public class SpaceShip extends Actor implements GGKeyListener
         Bomb bomb = new Bomb();
         gameGrid.addActor(bomb, getLocation());
         nbShots++;
-        if (nbShots ==1 ) {
-          spaceInvader.notifyAliensMoveFast();
+        if (nbShots ==10 ) {
+          spaceInvader.notifyAliensMoveFast(getMoveDistance());
 
 
         }
@@ -123,5 +123,19 @@ public class SpaceShip extends Actor implements GGKeyListener
   public boolean keyReleased(KeyEvent keyEvent) {
     return false;
   }
+  private int getMoveDistance() {
+    if (nbShots >= 500) {
+      return 5;
+    } else if (nbShots >= 100) {
+      return 4;
+    } else if (nbShots >= 50) {
+      return 3;
+    } else if (nbShots >= 10) {
+      return 2;
+    }
+    return 1; // default move distance
+  }
+
+
 }
 
