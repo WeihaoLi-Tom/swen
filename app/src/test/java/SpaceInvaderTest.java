@@ -10,6 +10,7 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 public class SpaceInvaderTest {
     class AlienTestData {
+        //add
         String type;
         int rowIndex;
         int colIndex;
