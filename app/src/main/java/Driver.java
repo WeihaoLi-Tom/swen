@@ -2,7 +2,7 @@ import java.util.Properties;
 import java.util.ArrayList;
 
 public class Driver {
-    public static final String DEFAULT_PROPERTIES_PATH = "properties/game2.properties";
+    public static final String DEFAULT_PROPERTIES_PATH = "properties/game3.properties";
 
     public static void main(String[] args) {
         String propertiesPath = DEFAULT_PROPERTIES_PATH;
@@ -20,10 +20,6 @@ public class Driver {
         System.out.println("logResult = " + logResult);
 
 
-        //Log
-        Logger logger = new Logger();
-        SpaceInvader spaceInvader = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations);
-        System.out.println("logResult = " + logger.getLog());
     }
 
     public static ArrayList<AlienGridLocation> convertFromProperty(Properties properties, String propertyName) {

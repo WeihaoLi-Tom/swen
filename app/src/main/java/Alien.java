@@ -97,6 +97,10 @@ public class Alien extends Actor
 
     removeSelf();
   }
+  public void setType(String type) {
+    this.type = type;
+  }
+
 
  
 
