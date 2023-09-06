@@ -26,6 +26,11 @@ public class Alien extends Actor
     this.colIndex = colIndex;
   }
 
+  public void hit() {
+    destroy();
+  }
+
+
   public String getType() {
     return type;
   }

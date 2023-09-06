@@ -57,25 +57,22 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     alienGrid = new Alien[nbRows][nbCols];
     for (int i = 0; i < nbRows; i++) {
       for (int k = 0; k < nbCols; k++) {
-        String imageName = "sprites/alien.gif";
         String type = "alien";
         if (arrayContains(powerfulAlienLocations, i, k)) {
-          imageName = "sprites/powerful_alien.gif";
           type = "powerful";
         } else if (arrayContains(invulnerableAlienLocations, i, k)) {
-          imageName = "sprites/invulnerable_alien.gif";
           type = "invulnerable";
         } else if (arrayContains(multipleAlienLocations, i, k)) {
-          imageName = "sprites/multiple_alien.gif";
           type = "multiple";
         }
-        Alien alien = new Alien(imageName, type, i, k);
+        Alien alien = AlienFactory.createAlien(type, i, k);  // create with factory
         addActor(alien, new Location(100 - 5 * nbCols + 10 * k, 10 + 10 * i));
         alien.setTestingConditions(isAutoTesting, movements);
         alienGrid[i][k] = alien;
       }
     }
   }
+
 
   private void setupSpaceShip() {
     SpaceShip ss = new SpaceShip(this);
