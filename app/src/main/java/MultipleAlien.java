@@ -12,7 +12,7 @@ public class MultipleAlien extends Alien {
     public void act() {
         super.act();
 
-        if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0) { // 1% chance to transform
+        if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0) {
             SpaceInvader game = (SpaceInvader) getGameGrid();
             int nbCols = alienGrid[0].length; // 获取列数
             for (int col = 0; col < nbCols; col++) {

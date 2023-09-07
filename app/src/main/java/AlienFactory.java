@@ -6,7 +6,7 @@ public class AlienFactory {
             case "invulnerable":
                 return new InvulnerableAlien(imageName, type, rowIndex, colIndex);
             case "multiple":
-//                return new MultipleAlien(imageName, type, rowIndex, colIndex, grid);
+                return new MultipleAlien(imageName, type, rowIndex, colIndex, grid);
             default:
                 return new Alien(imageName, type, rowIndex, colIndex);
         }
