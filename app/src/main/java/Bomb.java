@@ -26,7 +26,7 @@ public class Bomb extends Actor
     if (actors.size() > 0) {
       for (Actor actor : actors) {
         Alien alien = (Alien) actor;
-        alien.hit();  // 调用外星人的hit方法
+        alien.hit();
       }
       spaceInvader.notifyAlienHit(actors);
       Explosion explosion = new Explosion();
