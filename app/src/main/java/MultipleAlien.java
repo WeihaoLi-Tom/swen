@@ -15,21 +15,23 @@ public class MultipleAlien extends Alien {
         if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0) {
             SpaceInvader game = (SpaceInvader) getGameGrid();
             int nbCols = alienGrid[0].length;
+            Alien referenceAlien = alienGrid[0][0];
             for (int col = 0; col < nbCols; col++) {
                 Alien newAlien = new Alien("sprites/alien.gif", "alien", getRowIndex() - 1, col);
                 alienGrid[getRowIndex() - 1][col] = newAlien;
                 Location currentLocation = getLocation();
                 game.addActor(newAlien, new Location(currentLocation.x + (col - this.getColIndex()) * 10, currentLocation.y - 30));
 
-
-                int distance = this.getspeed();
-                newAlien.moveFaster(distance);
-                newAlien.setDirection(this.getDirection());
+                newAlien.setNbSteps(referenceAlien.getNbSteps());
+                newAlien.setspeed(referenceAlien.getspeed());
+                newAlien.setDirection(referenceAlien.getDirection());
             }
             setType("alien");
             hasTransformed = true;
         }
     }
+
+
 
 }
 

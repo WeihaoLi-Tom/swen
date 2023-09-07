@@ -134,6 +134,20 @@ public class Alien extends Actor
     return moveDistance;
   }
 
+  public void setspeed(int moveDistance){
+    this.moveDistance= moveDistance;
+  }
+
+  public int getNbSteps() {
+    return nbSteps;
+  }
+
+  public void setNbSteps(int nbSteps) {
+    this.nbSteps = nbSteps;
+  }
+
+
+
 
 
 }
