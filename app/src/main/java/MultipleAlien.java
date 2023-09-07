@@ -14,19 +14,23 @@ public class MultipleAlien extends Alien {
 
         if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0) {
             SpaceInvader game = (SpaceInvader) getGameGrid();
-            int nbCols = alienGrid[0].length; // 获取列数
+            int nbCols = alienGrid[0].length;
             for (int col = 0; col < nbCols; col++) {
                 Alien newAlien = new Alien("sprites/alien.gif", "alien", getRowIndex() - 1, col);
                 alienGrid[getRowIndex() - 1][col] = newAlien;
-                Location currentLocation = getLocation(); // 获取当前位置
-                game.addActor(newAlien, new Location(currentLocation.x + (col - this.getColIndex()) * 10, currentLocation.y - 30)); // 根据当前位置和列的差异来计算新的位置
+                Location currentLocation = getLocation();
+                game.addActor(newAlien, new Location(currentLocation.x + (col - this.getColIndex()) * 10, currentLocation.y - 30));
+
+
+                int distance = this.getspeed();
+                newAlien.moveFaster(distance);
+                newAlien.setDirection(this.getDirection());
             }
             setType("alien");
             hasTransformed = true;
         }
-
-
     }
+
 }
 
 

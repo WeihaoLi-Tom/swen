@@ -130,6 +130,10 @@ public class Alien extends Actor
     this.moveDistance = distance;
   }
 
+  public int getspeed() {
+    return moveDistance;
+  }
+
 
 
 }
