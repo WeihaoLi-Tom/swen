@@ -154,6 +154,8 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
     logResult.append("\n");
   }
 
+  //its here!!____________________________________________________________________________________________________________
+
   public void notifyAliensMoveFast(int distance) {
     logResult.append("Aliens start moving fast");
     for (int i = 0; i < nbRows; i++) {

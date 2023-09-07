@@ -84,7 +84,7 @@ public class Alien extends Actor
     }
     if (nbSteps < maxNbSteps) {
       move();
-      nbSteps++;
+      nbSteps+=moveDistance;
     } else {
       nbSteps = 0;
       int angle;
