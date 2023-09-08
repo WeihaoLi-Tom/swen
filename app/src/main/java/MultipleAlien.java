@@ -12,10 +12,10 @@ public class MultipleAlien extends Alien {
     public void act() {
         super.act();
 
-        if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0) {
-            SpaceInvader game = (SpaceInvader) getGameGrid();
+        SpaceInvader game = (SpaceInvader) getGameGrid();
+        if (!hasTransformed && Math.random() < 1 && getRowIndex() > 0 && !game.rowTransformed[getRowIndex()]) {
             int nbCols = alienGrid[0].length;
-            Alien referenceAlien = alienGrid[0][0];
+            Alien referenceAlien = this;
             for (int col = 0; col < nbCols; col++) {
                 Alien newAlien = new Alien("sprites/alien.gif", "alien", getRowIndex() - 1, col);
                 alienGrid[getRowIndex() - 1][col] = newAlien;
@@ -28,8 +28,10 @@ public class MultipleAlien extends Alien {
             }
             setType("alien");
             hasTransformed = true;
+            game.rowTransformed[getRowIndex()] = true;
         }
     }
+
 
 
 

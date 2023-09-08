@@ -27,6 +27,8 @@ public class SpaceInvader extends GameGrid implements GGKeyListener {
   private ArrayList<AlienGridLocation> multipleAlienLocations;
   private Alien[][] alienGrid = null;
   private String version;
+  public boolean[] rowTransformed = new boolean[nbRows];
+
 
 
 
