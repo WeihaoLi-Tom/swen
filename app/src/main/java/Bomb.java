@@ -23,10 +23,12 @@ public class Bomb extends Actor
     move();
     SpaceInvader spaceInvader = (SpaceInvader) gameGrid;
     List<Actor> actors = gameGrid.getActorsAt(getLocation(), Alien.class);
-    if (actors.size() > 0)
-    {
+    if (actors.size() > 0) {
+      for (Actor actor : actors) {
+        Alien alien = (Alien) actor;
+        alien.hit();
+      }
       spaceInvader.notifyAlienHit(actors);
-      gameGrid.removeActorsAt(getLocation(), Alien.class);
       Explosion explosion = new Explosion();
       gameGrid.addActor(explosion, getLocation());
       removeSelf();

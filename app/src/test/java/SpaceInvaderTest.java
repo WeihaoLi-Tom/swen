@@ -10,6 +10,7 @@ import java.util.Scanner;
 import static org.junit.Assert.*;
 public class SpaceInvaderTest {
     class AlienTestData {
+        //add
         String type;
         int rowIndex;
         int colIndex;
@@ -76,8 +77,15 @@ public class SpaceInvaderTest {
         int alien3ColIndex = 1;
         String testOriginal = "properties/test1.properties";
         final Properties properties = PropertiesLoader.loadPropertiesFile(testOriginal);
-        SpaceInvader spaceInvader = new SpaceInvader(properties);
+
+        ArrayList<AlienGridLocation> powerfulAlienLocations = convertFromProperty(properties, "Powerful.locations");
+        ArrayList<AlienGridLocation> invulnerableAlienLocations = convertFromProperty(properties, "Invulnerable.locations");
+        ArrayList<AlienGridLocation> multipleAlienLocations = convertFromProperty(properties, "Multiple.locations");
+
+
+        SpaceInvader spaceInvader = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations);
         String logResult = spaceInvader.runApp(true);
+
         assertTrue("alien 1 should be hit",
                 logResult.contains(String.format("An alien has been hit.alien@%d-%d", alien1RowIndex, alien1ColIndex)));
         assertTrue("alien 2 should be hit",
@@ -110,7 +118,20 @@ public class SpaceInvaderTest {
             break;
         }
     }
-
+    private ArrayList<AlienGridLocation> convertFromProperty(Properties properties, String propertyName) {
+        String alienString = properties.getProperty(propertyName);
+        ArrayList<AlienGridLocation> alienLocations = new ArrayList<>();
+        if (alienString != null) {
+            String[] locations = alienString.split(";");
+            for (String location : locations) {
+                String[] locationPair = location.split("-");
+                int rowIndex = Integer.parseInt(locationPair[0]);
+                int colIndex = Integer.parseInt(locationPair[1]);
+                alienLocations.add(new AlienGridLocation(rowIndex, colIndex));
+            }
+        }
+        return alienLocations;
+    }
     @Test(timeout = 20000)
     public void testSpaceInvaderPowerfulAlien() {
         int numberColumns = 5;
@@ -118,7 +139,12 @@ public class SpaceInvaderTest {
         int alien1ColIndex = 2;
         String testOriginal = "properties/test2.properties";
         final Properties properties = PropertiesLoader.loadPropertiesFile(testOriginal);
-        SpaceInvader spaceInvader = new SpaceInvader(properties);
+
+        ArrayList<AlienGridLocation> powerfulAlienLocations = convertFromProperty(properties, "Powerful.locations");
+        ArrayList<AlienGridLocation> invulnerableAlienLocations = convertFromProperty(properties, "Invulnerable.locations");
+        ArrayList<AlienGridLocation> multipleAlienLocations = convertFromProperty(properties, "Multiple.locations");
+
+        SpaceInvader spaceInvader = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations);
         String logResult = spaceInvader.runApp(true);
         System.out.println("logResult = " + logResult);
         String findStr = String.format("An alien has been hit.powerful@%d-%d", alien1RowIndex, alien1ColIndex);
@@ -147,7 +173,12 @@ public class SpaceInvaderTest {
     public void testSpaceInvaderFastMoving() {
         String testOriginal = "properties/test3.properties";
         final Properties properties = PropertiesLoader.loadPropertiesFile(testOriginal);
-        SpaceInvader spaceInvader = new SpaceInvader(properties);
+
+        ArrayList<AlienGridLocation> powerfulAlienLocations = convertFromProperty(properties, "Powerful.locations");
+        ArrayList<AlienGridLocation> invulnerableAlienLocations = convertFromProperty(properties, "Invulnerable.locations");
+        ArrayList<AlienGridLocation> multipleAlienLocations = convertFromProperty(properties, "Multiple.locations");
+
+        SpaceInvader spaceInvader = new SpaceInvader(properties, powerfulAlienLocations, invulnerableAlienLocations, multipleAlienLocations);
         String logResult = spaceInvader.runApp(true);
         System.out.println("logResult = " + logResult);
         String keyMessage = "Aliens start moving fast";

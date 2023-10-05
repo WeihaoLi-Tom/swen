@@ -13,6 +13,9 @@ public class SpaceShip extends Actor implements GGKeyListener
   private boolean isAutoTesting = false;
   private List<String> controls = null;
   private int controlIndex = 0;
+  private StringBuilder logResult = new StringBuilder();
+
+
   public SpaceShip(SpaceInvader spaceInvader)
   {
     super("sprites/spaceship.gif");
@@ -25,6 +28,7 @@ public class SpaceShip extends Actor implements GGKeyListener
   }
 
   private void autoMove() {
+    String version = spaceInvader.getVersion();
     if (isAutoTesting) {
       if (controls != null && controlIndex < controls.size()) {
         String control = controls.get(controlIndex);
@@ -45,6 +49,11 @@ public class SpaceShip extends Actor implements GGKeyListener
             Bomb bomb = new Bomb();
             gameGrid.addActor(bomb, getLocation());
             nbShots++;
+            if (nbShots ==10 &&"plus".equals(version)) {
+              spaceInvader.notifyAliensMoveFast(getMoveDistance());
+
+
+            }
             break;
           case "E":
             spaceInvader.setIsGameOver(true);
@@ -78,6 +87,7 @@ public class SpaceShip extends Actor implements GGKeyListener
 
   public boolean keyPressed(KeyEvent keyEvent)
   {
+    String version = spaceInvader.getVersion();
     Location next = null;
     switch (keyEvent.getKeyCode())
     {
@@ -95,6 +105,8 @@ public class SpaceShip extends Actor implements GGKeyListener
         Bomb bomb = new Bomb();
         gameGrid.addActor(bomb, getLocation());
         nbShots++;
+        spaceInvader.notifyAliensMoveFast(getMoveDistance());
+
         break;
     }
 
@@ -111,4 +123,29 @@ public class SpaceShip extends Actor implements GGKeyListener
   public boolean keyReleased(KeyEvent keyEvent) {
     return false;
   }
+  private int getMoveDistance() {
+    String version = spaceInvader.getVersion();
+//    System.out.println("Version: " + version);
+
+    if ("plus".equals(version)) {
+      if (nbShots >= 500) {
+        return 5;
+      } else if (nbShots >= 100) {
+        return 4;
+      } else if (nbShots >= 50) {
+        return 3;
+      } else if (nbShots >= 10) {
+        return 2;
+      }
+    }
+
+    return 1; // default move distance for "simple" version or any other version
+  }
+
+
+
+
+
+
 }
+
