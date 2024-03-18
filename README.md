@@ -1,2 +1,2 @@
 # Project 1 Template
-A template for Project 1
+## A template for Project 1
